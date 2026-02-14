@@ -69,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 AboutSection(),
-
                 SkillsSection(),
                 ExperienceSection(),
                 ProjectsSection(key: projectsKey),
