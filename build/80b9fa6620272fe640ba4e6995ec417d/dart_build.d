@@ -1,0 +1,1 @@
+ /Users/omarayman/StudioProjects/porofolio/build/80b9fa6620272fe640ba4e6995ec417d/dart_build_result.json:  /Users/omarayman/StudioProjects/porofolio/.dart_tool/package_config.json /Users/omarayman/StudioProjects/porofolio/pubspec.yaml /Users/omarayman/development/flutter/bin/cache/dart-sdk/version
