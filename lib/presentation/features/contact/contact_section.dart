@@ -1,4 +1,4 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
@@ -20,10 +20,7 @@ class ContactSection extends StatelessWidget {
       ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0xFF0D0D0D),
-            Color(0xFF111111),
-          ],
+          colors: [Color(0xFF0D0D0D), Color(0xFF111111)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -43,9 +40,7 @@ class ContactSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.1),
-                  ),
+                  border: Border.all(color: Colors.white.withOpacity(0.1)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +74,7 @@ class ContactSection extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: const [
                         PremiumContactItem(
-                          imagePath: "assets/icons/whatsapp_logo.png",
+                          imagePath: "https://res.cloudinary.com/dqxck6aff/image/upload/v1771626330/whatsapp_logo_x4ded2.png",
                           label: "+201115578285",
                           url: "https://wa.me/201115578285",
                         ),
@@ -89,8 +84,8 @@ class ContactSection extends StatelessWidget {
                           url: "mailto:omarayman.dev@gmail.com",
                         ),
                         PremiumContactItem(
-                          imagePath: "assets/icons/linkedin_logo.png",
-                          label: "LinkedIn Profile",
+                          imagePath: "https://res.cloudinary.com/dqxck6aff/image/upload/v1771625862/LinkedIn_logo_wu6jmu.png",
+                          label: "Linked-In Profile",
                           url: "https://linkedin.com/in/omarayman-dev",
                         ),
                       ],
@@ -105,6 +100,7 @@ class ContactSection extends StatelessWidget {
     );
   }
 }
+
 class PremiumContactItem extends StatefulWidget {
   final IconData? icon;
   final String? imagePath;
@@ -117,8 +113,14 @@ class PremiumContactItem extends StatefulWidget {
     this.imagePath,
     required this.label,
     required this.url,
-  }) : assert(icon != null || imagePath != null, 'Either icon or imagePath must be provided.'),
-       assert(icon == null || imagePath == null, 'Cannot provide both icon and imagePath.');
+  }) : assert(
+         icon != null || imagePath != null,
+         'Either icon or imagePath must be provided.',
+       ),
+       assert(
+         icon == null || imagePath == null,
+         'Cannot provide both icon and imagePath.',
+       );
 
   @override
   State<PremiumContactItem> createState() => _PremiumContactItemState();
@@ -142,33 +144,25 @@ class _PremiumContactItemState extends State<PremiumContactItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           curve: Curves.easeOut,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 28,
-            vertical: 18,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: _hovered
                 ? const LinearGradient(
-              colors: [
-                Color(0xFF4A00E0),
-                Color(0xFF8E2DE2),
-              ],
-            )
+                    colors: [Color(0xFF4A00E0), Color(0xFF8E2DE2)],
+                  )
                 : null,
             border: Border.all(
-              color: _hovered
-                  ? Colors.transparent
-                  : Colors.white24,
+              color: _hovered ? Colors.transparent : Colors.white24,
             ),
             boxShadow: _hovered
                 ? [
-              BoxShadow(
-                color: const Color(0xFF8E2DE2).withOpacity(0.4),
-                blurRadius: 20,
-                spreadRadius: 2,
-              )
-            ]
+                    BoxShadow(
+                      color: const Color(0xFF8E2DE2).withOpacity(0.4),
+                      blurRadius: 20,
+                      spreadRadius: 2,
+                    ),
+                  ]
                 : [],
           ),
           transform: _hovered
@@ -178,23 +172,18 @@ class _PremiumContactItemState extends State<PremiumContactItem> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.imagePath != null)
-                Image.asset(
-                  widget.imagePath!,
+                CachedNetworkImage(
+                  imageUrl: widget.imagePath!,
                   width: 24,
                   height: 24,
+                  fit: BoxFit.fill,
                 )
               else
-                Icon(
-                  widget.icon!,
-                  color: Colors.white,
-                ),
+                Icon(widget.icon!, color: Colors.white),
               const SizedBox(width: 12),
               Text(
                 widget.label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
           ),

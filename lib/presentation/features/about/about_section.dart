@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class AboutSection extends StatelessWidget {
@@ -12,28 +13,29 @@ class AboutSection extends StatelessWidget {
       color: const Color(0xFF16161E),
       child: isMobile
           ? Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildImage(),
-          const SizedBox(height: 40),
-          _buildTextContent(isMobile),
-        ],
-      )
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildImage(),
+                const SizedBox(height: 40),
+                _buildTextContent(isMobile),
+              ],
+            )
           : Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(child: _buildTextContent(isMobile)),
-          const SizedBox(width: 80),
-          Expanded(child: _buildImage()),
-        ],
-      ),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: _buildTextContent(isMobile)),
+                const SizedBox(width: 80),
+                Expanded(child: _buildImage()),
+              ],
+            ),
     );
   }
 
   Widget _buildTextContent(bool isMobile) {
     return Column(
-      crossAxisAlignment:
-      isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: isMobile
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         const Text(
           'About Me',
@@ -46,14 +48,10 @@ class AboutSection extends StatelessWidget {
         const SizedBox(height: 24),
         const Text(
           "Hi, I'm Omar Ayman — a passionate Flutter Developer with 5+ years of experience building high-performance mobile applications.\n\n"
-              "I specialize in scalable architecture, clean code, and crafting seamless user experiences. My focus is not just shipping features — but building reliable, production-ready systems that scale.\n\n"
-              "From idea to deployment, I build digital products that perform, evolve, and deliver real business value.",
+          "I specialize in scalable architecture, clean code, and crafting seamless user experiences. My focus is not just shipping features — but building reliable, production-ready systems that scale.\n\n"
+          "From idea to deployment, I build digital products that perform, evolve, and deliver real business value.",
           textAlign: TextAlign.start,
-          style: TextStyle(
-            fontSize: 18,
-            height: 1.6,
-            color: Colors.white70,
-          ),
+          style: TextStyle(fontSize: 18, height: 1.6, color: Colors.white70),
         ),
         const SizedBox(height: 32),
         Wrap(
@@ -86,9 +84,10 @@ class AboutSection extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            'assets/images/profile.jpg', // <-- replace with your image
-            fit: BoxFit.cover,
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://res.cloudinary.com/dqxck6aff/image/upload/v1771625863/pro_pic_light_1_cfakbw.jpg',
+            fit: BoxFit.fill,
           ),
         ),
       ),

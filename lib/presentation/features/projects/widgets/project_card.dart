@@ -33,11 +33,15 @@ class _ProjectCardState extends State<ProjectCard> {
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        transform: _isHovered ? (Matrix4.identity()..scale(1.07)) : Matrix4.identity(),
+        transform: _isHovered
+            ? (Matrix4.identity()..scale(1.07))
+            : Matrix4.identity(),
         child: Card(
           elevation: _isHovered ? 16 : 4,
           shadowColor: Colors.black.withOpacity(0.5),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: AnimatedSize(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
@@ -72,7 +76,8 @@ class _ProjectCardState extends State<ProjectCard> {
                   imageUrl: widget.project.projectIconUrl!,
                   width: 40,
                   height: 40,
-                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
@@ -95,8 +100,9 @@ class _ProjectCardState extends State<ProjectCard> {
                   onTap: () => _launchUrl(widget.project.appStoreUrl!),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/icons/app-store-logo.webp',
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://res.cloudinary.com/dqxck6aff/image/upload/v1771625862/app-store-logo_kztcfy.webp',
                       width: 40,
                       height: 40,
                       fit: BoxFit.cover,
@@ -110,8 +116,9 @@ class _ProjectCardState extends State<ProjectCard> {
                 onTap: () => _launchUrl(widget.project.googlePlayUrl!),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/icons/play-store.jpg',
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://res.cloudinary.com/dqxck6aff/image/upload/v1771625862/play-store_e1wozl.jpg',
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
@@ -134,10 +141,12 @@ class _ProjectCardState extends State<ProjectCard> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: widget.project.techStack
-                .map((tech) => Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Chip(label: Text(tech)),
-                    ))
+                .map(
+                  (tech) => Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Chip(label: Text(tech)),
+                  ),
+                )
                 .toList(),
           ),
         ),
@@ -172,7 +181,10 @@ class _ProjectCardState extends State<ProjectCard> {
           if (widget.project.challenges != null &&
               widget.project.challenges!.isNotEmpty)
             _buildSection(
-                "Challenges & Solutions", widget.project.challenges!, textTheme),
+              "Challenges & Solutions",
+              widget.project.challenges!,
+              textTheme,
+            ),
           if (widget.project.screenshots.isNotEmpty)
             _buildScreenshotsSection(textTheme),
         ],
@@ -180,22 +192,31 @@ class _ProjectCardState extends State<ProjectCard> {
     );
   }
 
-  Widget _buildSection(String title, List<String> content, TextTheme textTheme) {
+  Widget _buildSection(
+    String title,
+    List<String> content,
+    TextTheme textTheme,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          title,
+          style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
-        ...content.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, left: 16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("• "),
-                  Expanded(child: Text(item, style: textTheme.bodyMedium)),
-                ],
-              ),
-            )),
+        ...content.map(
+          (item) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0, left: 16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("• "),
+                Expanded(child: Text(item, style: textTheme.bodyMedium)),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
       ],
     );
@@ -205,18 +226,28 @@ class _ProjectCardState extends State<ProjectCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Technical Implementation", style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          "Technical Implementation",
+          style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
-        ...widget.project.technicalDetails.entries.map((entry) => Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, left: 16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("${entry.key}: ", style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
-                  Expanded(child: Text(entry.value, style: textTheme.bodyMedium)),
-                ],
-              ),
-            )),
+        ...widget.project.technicalDetails.entries.map(
+          (entry) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0, left: 16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${entry.key}: ",
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(child: Text(entry.value, style: textTheme.bodyMedium)),
+              ],
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
       ],
     );
@@ -226,7 +257,10 @@ class _ProjectCardState extends State<ProjectCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Screenshots", style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+        Text(
+          "Screenshots",
+          style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 16),
         SizedBox(
           height: 200,
