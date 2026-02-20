@@ -74,7 +74,8 @@ class ContactSection extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       children: const [
                         PremiumContactItem(
-                          imagePath: "https://res.cloudinary.com/dqxck6aff/image/upload/v1771626330/whatsapp_logo_x4ded2.png",
+                          imagePath:
+                              "https://res.cloudinary.com/dqxck6aff/image/upload/v1771626330/whatsapp_logo_x4ded2.png",
                           label: "+201115578285",
                           url: "https://wa.me/201115578285",
                         ),
@@ -84,7 +85,8 @@ class ContactSection extends StatelessWidget {
                           url: "mailto:omarayman.dev@gmail.com",
                         ),
                         PremiumContactItem(
-                          imagePath: "https://res.cloudinary.com/dqxck6aff/image/upload/v1771625862/LinkedIn_logo_wu6jmu.png",
+                          imagePath:
+                              "https://res.cloudinary.com/dqxck6aff/image/upload/v1771625862/LinkedIn_logo_wu6jmu.png",
                           label: "Linked-In Profile",
                           url: "https://linkedin.com/in/omarayman-dev",
                         ),
